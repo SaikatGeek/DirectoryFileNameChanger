@@ -1,15 +1,18 @@
 <?php
 
-$dir = new \DirectoryIterator( realpath( "" ) );
+function directoryFileNameChanger(path, replaceString, ReplaceByString)
+{
+    $dir = new \DirectoryIterator( realpath(path) );
+    
+    foreach ($dir as $fileInfo) {
+        if( $fileName = str_replace( replaceString, ReplaceByString, $filename ) ) {
 
-foreach ($dir as $fileInfo) {
-    if( $fileName = str_replace( "replace", "replace_by", $filename ) ) {
-
-        rename(
-            "old name" . $fileInfo->getFilename(), 
-            "new_name" . $fileName
-        );
+            rename(
+                "old name" . $fileInfo->getFilename(), 
+                "new_name" . $fileName
+            );
+        }
     }
 }
 
-
+directoryFileNameChanger(path, replaceString, ReplaceByString);
